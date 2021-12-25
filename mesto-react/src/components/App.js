@@ -1,20 +1,25 @@
-import '../../index.css';
-import logoHeader from '../../image/Vector.svg';
-import editIcon from '../../image/Edit.svg';
-import addButtonIcon from '../../image/Add_button.svg';
-import closeIcon from '../../image/Close_Icon.svg';
-import deleteIcon from '../../image/delete_2.svg';
-import likeIcon from '../../image/Like.svg';
+import '../index.css';
+import Header from '../components/Header';
+import Main from '../components/Main';
+import Footer from '../components/Footer';
+
+import logoHeader from '../image/Vector.svg';
+import editIcon from '../image/Edit.svg';
+import addButtonIcon from '../image/Add_button.svg';
+import closeIcon from '../image/Close_Icon.svg';
+import deleteIcon from '../image/delete_2.svg';
+import likeIcon from '../image/Like.svg';
 
 function App() {
     return (
     <div className="body">
         <div className="page">
-            <header className="header">
+            <Header />
+            {/*<header className="header">
                 <img className="header__logo" src={logoHeader} alt="Логотип"/>
-            </header>
+            </header>*/}
 
-            <main>
+            {/*<main>
                 <section className="profile">
                     <div className="profile__avatar-container">
                         <button className="profile__edit-avatar" type="button"></button>
@@ -34,11 +39,13 @@ function App() {
                 </section>
 
                 <section className="elements" aria-label="Фотоальбом"></section>
-            </main>
+            </main>*/}
+            <Main />
 
-            <footer className="footer">
+            {/*<footer className="footer">
                 <p className="footer__copyright">&copy; 2021 Mesto Russia</p>
-            </footer>
+            </footer>*/}
+            <Footer />
         </div>
 
         <div className="popup popup_type_edit">
