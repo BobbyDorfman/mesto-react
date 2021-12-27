@@ -1,4 +1,4 @@
-.adding-cards {
+.popup__container {
     width: 430px;
     min-height: 330px;
     background: #fff;
@@ -9,7 +9,7 @@
 }
 
 @media screen and (max-width: 600px) {
-    .adding-cards {
+    .popup__container {
         width: 282px;
         min-height: 322px;
     }

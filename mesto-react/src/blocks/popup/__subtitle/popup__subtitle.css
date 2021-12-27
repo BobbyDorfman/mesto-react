@@ -1,4 +1,4 @@
-.adding-cards__subtitle_link {
+.popup__subtitle {
     width: 100%;
     font-weight: 400;
     font-size: 14px;
@@ -11,6 +11,6 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.adding-cards__subtitle_link:last-of-type {
+.popup__subtitle:last-of-type {
     margin-bottom: 0;
 }

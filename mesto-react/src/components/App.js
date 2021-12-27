@@ -1,21 +1,35 @@
+import React from "react";
 import '../index.css';
-import Header from '../components/Header';
-import Main from '../components/Main';
-import Footer from '../components/Footer';
+import Header from './Header';
+import Main from './Main';
+import Footer from './Footer';
+import PopupWithForm from "./PopupWithForm";
 
 import closeIcon from '../image/Close_Icon.svg';
 import deleteIcon from '../image/delete_2.svg';
 import likeIcon from '../image/Like.svg';
 
 function App() {
-    function handleEditAvatarClick() {
-        document.querySelector('.popup_type_avatar').classList.add('popup_is-opened');
-    }
+    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState()
+    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState()
+    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState()
+
     function handleEditProfileClick() {
-        document.querySelector('.popup_type_edit').classList.add('popup_is-opened');
+        setIsEditProfilePopupOpen(true)
     }
+
     function handleAddPlaceClick() {
-        document.querySelector('.popup_type_add').classList.add('popup_is-opened');
+        setIsAddPlacePopupOpen(true)
+    }
+
+    function handleEditAvatarClick() {
+        setIsEditAvatarPopupOpen(true)
+    }
+
+    function closeAllPopups() {
+        setIsEditProfilePopupOpen(false)
+        setIsAddPlacePopupOpen(false)
+        setIsEditAvatarPopupOpen(false)
     }
 
     return (
@@ -30,45 +44,94 @@ function App() {
             <Footer />
         </div>
 
-        <div className="popup popup_type_edit">
-            <div className="edit-form">
-                <button className="popup__close edit-form__close-icon" type="button">
+        <PopupWithForm 
+            isOpen={isEditProfilePopupOpen}
+            onClose={closeAllPopups}
+            title={'Редактировать профиль'} 
+            name={'form_edit'}
+            children={(
+                <>
+                    <input type="text" name="name_profile" className="popup__input popup__subtitle" 
+                    id="profile_name" placeholder="Имя" minLength="2" maxLength="40" required />
+                    <span className="popup__error" id="input-name-error"/>
+                    <input type="text" name="type_of_profession" className="popup__input popup__subtitle" 
+                    id="input-subtitle" placeholder="Профессиональная деятельность" minLength="2" maxLength="200"
+                    required />
+                    <span className="popup__error" id="input-subtitle-error"/>
+                </>
+            )}
+        />
+
+        <PopupWithForm 
+            isOpen={isAddPlacePopupOpen}
+            onClose={closeAllPopups}
+            title={'Новое место'} 
+            name={'form_add'}
+            children={(
+                <>
+                    <input type="text" name="name" className="popup__input popup__subtitle" 
+                    id="profile_name" placeholder="Название" minLength="2" maxLength="30" required />
+                    <span className="popup__error" id="input-name-adding-error"/>
+                    <input type="url" name="link" className="popup__input popup__subtitle" 
+                    id="input-link" placeholder="Ссылка на картинку" required />
+                    <span className="popup__error" id="input-link-error"/>
+                </>
+            )}
+        />
+
+        <PopupWithForm 
+            isOpen={isEditAvatarPopupOpen}
+            onClose={closeAllPopups}
+            title={'Обновить аватар'} 
+            name={'form_avatar'}
+            children={(
+                <>
+                    <input type="url" name="avatar" className="popup__input popup__subtitle" 
+                    id="input-name-avatar" placeholder="https://somewebsite.com/someimage.jpg" required />
+                    <span className="popup__error" id="input-name-avatar-error"/>
+                </>
+            )}
+        />
+
+        {/*<div className="popup popup_type_edit">
+            <div className="popup__container">
+                <button className="popup__close" type="button">
                     <img className="popup__close-image" src={closeIcon} alt="Иконка - закрыть" />
                 </button>
-                <h2 className="edit-form__title">Редактировать профиль</h2>
-                <form className="popup__form popup__form_type_edit" name="form_edit" noValidate>
-                    <input type="text" name="name_profile" className="popup__input edit-form__name" 
+                <h2 className="popup__title">Редактировать профиль</h2>
+                <form className="popup__form" name="form_edit" noValidate>
+                    <input type="text" name="name_profile" className="popup__input popup__subtitle" 
                     id="input-name" minLength={2} maxLength={40} required />
                     <span className="popup__error" id="input-name-error" />
-                    <input type="text" name="type_of_profession" className="popup__input edit-form__subtitle" 
+                    <input type="text" name="type_of_profession" className="popup__input popup__subtitle" 
                     id="input-subtitle" minLength={2} maxLength={200} required />
                     <span className="popup__error" id="input-subtitle-error" />
-                    <button type="submit" className="popup__button edit-form__submit-button">Сохранить</button>
+                    <button type="submit" className="popup__button">Сохранить</button>
                 </form>
             </div>
-        </div>
+        </div>*/}
 
-        <div className="popup popup_type_add">
-            <div className="adding-cards">
-                <button className="popup__close adding-cards__close-icon" type="button">
+        {/*<div className="popup popup_type_add">
+            <div className="popup__container">
+                <button className="popup__close" type="button">
                     <img className="popup__close-image" src={closeIcon} alt="Иконка - закрыть" />
                 </button>
-                <h2 className="adding-cards__title">Новое место</h2>
-                <form className="popup__form popup__form_type_adding" name="form_add" novalidate>
-                    <input className="popup__input adding-cards__subtitle adding-cards__subtitle_name" required 
+                <h2 className="popup__title">Новое место</h2>
+                <form className="popup__form" name="form_add" novalidate>
+                    <input className="popup__input popup__subtitle" required 
                     minlength={2} maxlength={30} id="input-name-adding" type="text" name="name" placeholder="Название" />
                     <span className="popup__error" id="input-name-adding-error"></span>
-                    <input className="popup__input adding-cards__subtitle adding-cards__subtitle_link" required 
+                    <input className="popup__input popup__subtitle" required 
                     type="url" name="link" id="input-link" placeholder="Ссылка на картинку" />
                     <span className="popup__error" id="input-link-error"></span>
-                    <button type="submit" className="popup__button adding-cards__submit-button">Создать</button>
+                    <button type="submit" className="popup__button">Создать</button>
                 </form>
             </div>
-        </div>
+        </div>*/}
 
         <div className="popup popup_type_image">
             <div className="image-in-full">
-                <button className="popup__close image-in-full__close-icon" type="button">
+                <button className="popup__close" type="button">
                     <img className="popup__close-image" src={closeIcon} alt="Иконка - закрыть" />
                 </button>
                 <figure className="image-in-full__content">
@@ -79,31 +142,31 @@ function App() {
         </div>
 
         <div className="popup popup_type_delete">
-            <div className="delete-cards">
-                <button className="popup__close delete-cards__close-icon" type="button">
+            <div className="popup__container">
+                <button className="popup__close" type="button">
                     <img className="popup__close-image" src={closeIcon} alt="Иконка - закрыть" />
                 </button>
-                <h2 className="delete-cards__title">Вы уверены?</h2>
-                <form className="popup__form popup__form_type_delete" name="form_delete" novalidate>
-                    <button type="submit" className="popup__button delete-cards__submit-button">Да</button>
+                <h2 className="popup__title">Вы уверены?</h2>
+                <form className="popup__form" name="form_delete" novalidate>
+                    <button type="submit" className="popup__button">Да</button>
                 </form>
             </div>
         </div>
 
-        <div className="popup popup_type_avatar">
-            <div className="edit-avatar">
-                <button className="popup__close edit-avatar__close-icon" type="button">
+        {/*<div className="popup popup_type_avatar">
+            <div className="popup__container">
+                <button className="popup__close" type="button">
                     <img className="popup__close-image" src={closeIcon} alt="Иконка - закрыть" />
                 </button>
-                <h2 className="edit-avatar__title">Обновить аватар</h2>
-                <form className="popup__form popup__form_type_avatar" name="form_avatar" novalidate>
-                    <input className="popup__input edit-avatar__subtitle edit-avatar__subtitle_name" id="input-name-avatar" 
+                <h2 className="popup__title">Обновить аватар</h2>
+                <form className="popup__form" name="form_avatar" novalidate>
+                    <input className="popup__input popup__subtitle" id="input-name-avatar" 
                     type="url" name="avatar" placeholder="https://somewebsite.com/someimage.jpg" required />
                     <span className="popup__error" id="input-name-avatar-error"></span>
                     <button type="submit" className="popup__button">Создать</button>
                 </form>
             </div>
-        </div>
+        </div>*/}
 
         <template id="card-template">
             <article className="element">
