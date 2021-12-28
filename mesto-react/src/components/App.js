@@ -4,15 +4,15 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from "./PopupWithForm";
+import ImagePopup from "./ImagePopup";
 
 import closeIcon from '../image/Close_Icon.svg';
-import deleteIcon from '../image/delete_2.svg';
-import likeIcon from '../image/Like.svg';
 
 function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState()
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState()
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState()
+    const [selectedCard, setSelectedCard] = React.useState(null)
 
     function handleEditProfileClick() {
         setIsEditProfilePopupOpen(true)
@@ -26,10 +26,15 @@ function App() {
         setIsEditAvatarPopupOpen(true)
     }
 
+    function handleCardClick (card) {
+        setSelectedCard(card)
+    }
+
     function closeAllPopups() {
         setIsEditProfilePopupOpen(false)
         setIsAddPlacePopupOpen(false)
         setIsEditAvatarPopupOpen(false)
+        setSelectedCard(null)
     }
 
     return (
@@ -40,6 +45,7 @@ function App() {
                 onEditAvatar={handleEditAvatarClick}
                 onEditProfile={handleEditProfileClick}
                 onAddPlace={handleAddPlaceClick}
+                onCardClick={handleCardClick}
             />
             <Footer />
         </div>
@@ -93,7 +99,12 @@ function App() {
             )}
         />
 
-        <div className="popup popup_type_delete">
+        <ImagePopup
+            card={selectedCard}
+            onClose={closeAllPopups}
+        />
+
+        {/*<div className="popup popup_type_delete">
             <div className="popup__container">
                 <button className="popup__close" type="button">
                     <img className="popup__close-image" src={closeIcon} alt="Иконка - закрыть" />
@@ -103,25 +114,7 @@ function App() {
                     <button type="submit" className="popup__button">Да</button>
                 </form>
             </div>
-        </div>
-
-        <template id="card-template">
-            <article className="element">
-                <button className="element__button-delete" type="button">
-                    <img className="element__delete" src={deleteIcon} alt="Иконка удаления карточки" />
-                </button>
-                <img className="element__image" src="src" alt="alt" />
-                <div className="element__down">
-                    <h2 className="element__title"></h2>
-                    <div className="element__likes">
-                        <button className="element__button" type="button">
-                            <img className="element__like" src={likeIcon} alt="Лайк" />
-                        </button>
-                        <span className="element__like-counter">0</span>
-                    </div>
-                </div>
-            </article>
-        </template>
+        </div>*/}
 
     </div>
   );

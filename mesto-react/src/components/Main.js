@@ -1,5 +1,6 @@
 import '../index.css';
 import api from "../utils/Api";
+import Card from "./Card";
 import React, {useEffect} from "react";
 import editIcon from '../image/Edit.svg';
 import addButtonIcon from '../image/Add_button.svg';
@@ -7,14 +8,14 @@ import addButtonIcon from '../image/Add_button.svg';
 function Main(props) {
 
     const [userInfo, setUserInfo] = React.useState({})
-    //const [cards, setCards] = React.useState([])
+    const [cards, setCards] = React.useState([])
     useEffect(() => {
-        Promise.all([/*api.getInitialCards(),*/ api.getApiUserInfo()])
-        .then(([ /*cards,*/ userData ]) => {
+        Promise.all([api.getInitialCards(), api.getApiUserInfo()])
+        .then(([ cards, userData ]) => {
             setUserInfo(userData);
             //userId = userData._id;
     
-            //setCards(cards);
+            setCards(cards);
         })
         .catch((err) => {
             console.log(`Карточки не отобразились. Произошла ошибка: ${err}`);
@@ -41,7 +42,18 @@ function Main(props) {
                 </button>
             </section>
 
-            <section className="elements" aria-label="Фотоальбом"></section>
+            <section className="elements" aria-label="Фотоальбом">
+                {cards.map((cards, id) => (
+                    <Card
+                    key={id}
+                    card={cards}
+                    link={cards.link}
+                    name={cards.name}
+                    likes={cards.likes.length}
+                    onCardClick={props.onCardClick}
+                />
+                ))}
+            </section>
         </main>
     );
 }
