@@ -93,54 +93,6 @@ function App() {
             )}
         />
 
-        {/*<div className="popup popup_type_edit">
-            <div className="popup__container">
-                <button className="popup__close" type="button">
-                    <img className="popup__close-image" src={closeIcon} alt="Иконка - закрыть" />
-                </button>
-                <h2 className="popup__title">Редактировать профиль</h2>
-                <form className="popup__form" name="form_edit" noValidate>
-                    <input type="text" name="name_profile" className="popup__input popup__subtitle" 
-                    id="input-name" minLength={2} maxLength={40} required />
-                    <span className="popup__error" id="input-name-error" />
-                    <input type="text" name="type_of_profession" className="popup__input popup__subtitle" 
-                    id="input-subtitle" minLength={2} maxLength={200} required />
-                    <span className="popup__error" id="input-subtitle-error" />
-                    <button type="submit" className="popup__button">Сохранить</button>
-                </form>
-            </div>
-        </div>*/}
-
-        {/*<div className="popup popup_type_add">
-            <div className="popup__container">
-                <button className="popup__close" type="button">
-                    <img className="popup__close-image" src={closeIcon} alt="Иконка - закрыть" />
-                </button>
-                <h2 className="popup__title">Новое место</h2>
-                <form className="popup__form" name="form_add" novalidate>
-                    <input className="popup__input popup__subtitle" required 
-                    minlength={2} maxlength={30} id="input-name-adding" type="text" name="name" placeholder="Название" />
-                    <span className="popup__error" id="input-name-adding-error"></span>
-                    <input className="popup__input popup__subtitle" required 
-                    type="url" name="link" id="input-link" placeholder="Ссылка на картинку" />
-                    <span className="popup__error" id="input-link-error"></span>
-                    <button type="submit" className="popup__button">Создать</button>
-                </form>
-            </div>
-        </div>*/}
-
-        <div className="popup popup_type_image">
-            <div className="image-in-full">
-                <button className="popup__close" type="button">
-                    <img className="popup__close-image" src={closeIcon} alt="Иконка - закрыть" />
-                </button>
-                <figure className="image-in-full__content">
-                    <img className="image-in-full__image" src="src" alt="alt" />
-                    <figcaption className="image-in-full__caption"></figcaption>
-                </figure>
-            </div>
-        </div>
-
         <div className="popup popup_type_delete">
             <div className="popup__container">
                 <button className="popup__close" type="button">
@@ -152,21 +104,6 @@ function App() {
                 </form>
             </div>
         </div>
-
-        {/*<div className="popup popup_type_avatar">
-            <div className="popup__container">
-                <button className="popup__close" type="button">
-                    <img className="popup__close-image" src={closeIcon} alt="Иконка - закрыть" />
-                </button>
-                <h2 className="popup__title">Обновить аватар</h2>
-                <form className="popup__form" name="form_avatar" novalidate>
-                    <input className="popup__input popup__subtitle" id="input-name-avatar" 
-                    type="url" name="avatar" placeholder="https://somewebsite.com/someimage.jpg" required />
-                    <span className="popup__error" id="input-name-avatar-error"></span>
-                    <button type="submit" className="popup__button">Создать</button>
-                </form>
-            </div>
-        </div>*/}
 
         <template id="card-template">
             <article className="element">
