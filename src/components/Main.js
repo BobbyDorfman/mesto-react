@@ -43,9 +43,9 @@ function Main(props) {
             </section>
 
             <section className="elements" aria-label="Фотоальбом">
-                {cards.map((cards, id) => (
+                {cards.map((cards, _id) => (
                     <Card
-                    key={id}
+                    key={_id}
                     card={cards}
                     link={cards.link}
                     name={cards.name}

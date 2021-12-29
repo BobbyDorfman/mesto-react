@@ -6,12 +6,10 @@ import Footer from './Footer';
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 
-import closeIcon from '../image/Close_Icon.svg';
-
 function App() {
-    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState()
-    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState()
-    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState()
+    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
+    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false)
+    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false)
     const [selectedCard, setSelectedCard] = React.useState(null)
 
     function handleEditProfileClick() {
@@ -50,54 +48,42 @@ function App() {
             <Footer />
         </div>
 
-        <PopupWithForm 
+        <PopupWithForm
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
             title={'Редактировать профиль'} 
-            name={'form_edit'}
-            children={(
-                <>
-                    <input type="text" name="name_profile" className="popup__input popup__subtitle" 
-                    id="profile_name" placeholder="Имя" minLength="2" maxLength="40" required />
-                    <span className="popup__error" id="input-name-error"/>
-                    <input type="text" name="type_of_profession" className="popup__input popup__subtitle" 
-                    id="input-subtitle" placeholder="Профессиональная деятельность" minLength="2" maxLength="200"
-                    required />
-                    <span className="popup__error" id="input-subtitle-error"/>
-                </>
-            )}
-        />
+            name={'form_edit'}>
+                <input type="text" name="name_profile" className="popup__input popup__subtitle" 
+                id="profile_name" placeholder="Имя" minLength="2" maxLength="40" required />
+                <span className="popup__error" id="input-name-error"/>
+                <input type="text" name="type_of_profession" className="popup__input popup__subtitle" 
+                id="input-subtitle" placeholder="Профессиональная деятельность" minLength="2" maxLength="200"
+                required />
+                <span className="popup__error" id="input-subtitle-error"/>
+        </PopupWithForm>
 
-        <PopupWithForm 
+        <PopupWithForm
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
             title={'Новое место'} 
-            name={'form_add'}
-            children={(
-                <>
-                    <input type="text" name="name" className="popup__input popup__subtitle" 
-                    id="profile_name" placeholder="Название" minLength="2" maxLength="30" required />
-                    <span className="popup__error" id="input-name-adding-error"/>
-                    <input type="url" name="link" className="popup__input popup__subtitle" 
-                    id="input-link" placeholder="Ссылка на картинку" required />
-                    <span className="popup__error" id="input-link-error"/>
-                </>
-            )}
-        />
+            name={'form_add'}>
+                <input type="text" name="name" className="popup__input popup__subtitle" 
+                id="profile_name" placeholder="Название" minLength="2" maxLength="30" required />
+                <span className="popup__error" id="input-name-adding-error"/>
+                <input type="url" name="link" className="popup__input popup__subtitle" 
+                id="input-link" placeholder="Ссылка на картинку" required />
+                <span className="popup__error" id="input-link-error"/>
+        </PopupWithForm>
 
-        <PopupWithForm 
+        <PopupWithForm
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
             title={'Обновить аватар'} 
-            name={'form_avatar'}
-            children={(
-                <>
-                    <input type="url" name="avatar" className="popup__input popup__subtitle" 
-                    id="input-name-avatar" placeholder="https://somewebsite.com/someimage.jpg" required />
-                    <span className="popup__error" id="input-name-avatar-error"/>
-                </>
-            )}
-        />
+            name={'form_avatar'}>
+                <input type="url" name="avatar" className="popup__input popup__subtitle" 
+                id="input-name-avatar" placeholder="https://somewebsite.com/someimage.jpg" required />
+                <span className="popup__error" id="input-name-avatar-error"/>
+        </PopupWithForm>
 
         <ImagePopup
             card={selectedCard}
