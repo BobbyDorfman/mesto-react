@@ -18,6 +18,8 @@
 @import url(./blocks/elements/elements.css);
 @import url(./blocks/element/element.css);
 @import url(./blocks/element/__button-delete/element__button-delete.css);
+@import url(./blocks/element/__button-delete/_hide/element__button-delete_hide.css);
+@import url(./blocks/element/__button-delete/_visible/element__button-delete_visible.css);
 @import url(./blocks/element/__delete/element__delete.css);
 @import url(./blocks/element/__down/element__down.css);
 @import url(./blocks/element/__image/element__image.css);

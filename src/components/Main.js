@@ -1,13 +1,15 @@
 import '../index.css';
-import api from "../utils/Api";
+//import api from "../utils/Api";
 import Card from "./Card";
-import React, {useEffect} from "react";
+import React from "react";
 import editIcon from '../image/Edit.svg';
 import addButtonIcon from '../image/Add_button.svg';
+import { CurrentUserContext } from "../constexts/CurrentUserContext";
 
 function Main(props) {
+    const currentUser = React.useContext(CurrentUserContext)
 
-    const [userInfo, setUserInfo] = React.useState({})
+    /*//const [userInfo, setUserInfo] = React.useState({})
     const [cards, setCards] = React.useState([])
     useEffect(() => {
         Promise.all([api.getInitialCards(), api.getApiUserInfo()])
@@ -20,22 +22,22 @@ function Main(props) {
         .catch((err) => {
             console.log(`Карточки не отобразились. Произошла ошибка: ${err}`);
         });
-    }, [])
+    }, [])*/
 
     return (
         <main>
             <section className="profile">
                 <div className="profile__avatar-container">
                     <button className="profile__edit-avatar" type="button" onClick={props.onEditAvatar}></button>
-                    <img className="profile__avatar" src={userInfo.avatar} alt={userInfo.name} />
+                    <img className="profile__avatar" src={currentUser.avatar} alt={currentUser.name} />
                 </div>
 
                 <div className="profile__info">
-                    <h1 className="profile__title">{userInfo.name}</h1>
+                    <h1 className="profile__title">{currentUser.name}</h1>
                     <button className="profile__edit-button" type="button" onClick={props.onEditProfile}>
                         <img className="profile__pencil" src={editIcon} alt="Элемент редактирования" />
                     </button>
-                    <p className="profile__subtitle">{userInfo.about}</p>
+                    <p className="profile__subtitle">{currentUser.about}</p>
                 </div>
                 <button className="profile__add-button" type="button" onClick={props.onAddPlace}>
                     <img className="profile__plus" src={addButtonIcon} alt="Знак - добавить" />
@@ -43,7 +45,7 @@ function Main(props) {
             </section>
 
             <section className="elements" aria-label="Фотоальбом">
-                {cards.map((cards, _id) => (
+                {props.cards.map((cards, _id) => (
                     <Card
                     key={_id}
                     card={cards}
