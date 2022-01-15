@@ -27,6 +27,59 @@ function App() {
             })
     }, [])
 
+    function handleCardLike(card) {
+        // Снова проверяем, есть ли уже лайк на этой карточке
+        const isLiked = card.likes.some(i => i._id === currentUser._id);
+        
+        // Отправляем запрос в API и получаем обновлённые данные карточки
+        if (!isLiked) {
+            api.addLike(card._id).then((newCard) => {
+                setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+            })
+            .catch((err) => {
+                console.log(`Что-то пошло не так, Like не поставился. Ошибка: ${err}`)
+            });
+        } else {
+            api.deleteLike(card._id).then((newCard) => {
+                setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+            })
+            .catch((err) => {
+                console.log(`Что-то пошло не так, Like не убрался. Ошибка: ${err}`)
+            })
+        }
+    }
+
+    /*function handleCardLike(card) {
+        const isLiked = card.likes.some(i => i._id === currentUser._id)
+
+        if (!isLiked) {
+            api.addCardLike(card._id)
+                .then((newCard) => {
+                    setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+                })
+                .catch((err) => {
+                    console.log(`Не получилось поставить лайк: ${err}`)
+                })
+        } else {
+            api.deleteCardLike(card._id)
+                .then((newCard) => {
+                    setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+                })
+                .catch((err) => {
+                    console.log(`Не получилось дизлайкнуть: ${err}`)
+                })
+        }
+    }*/
+
+    function handleDeleteCard(card) {
+        api.deleteCard(card).then(() => {
+            setCards((items) => items.filter((c) => c._id !== card._id && c))
+        })
+        .catch((err) => {
+            console.log(`Что-то пошло не так, карточка не удалилась. Ошибка: ${err}`)
+        })
+    }
+
     function handleEditProfileClick() {
         setIsEditProfilePopupOpen(true)
     }
@@ -61,6 +114,8 @@ function App() {
                     onAddPlace={handleAddPlaceClick}
                     onCardClick={handleCardClick}
                     cards={cards}
+                    onCardLike={handleCardLike}
+                    onDeleteCard={handleDeleteCard}
                 />
                 <Footer />
             </div>

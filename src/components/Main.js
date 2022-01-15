@@ -1,5 +1,5 @@
 import '../index.css';
-//import api from "../utils/Api";
+import api from "../utils/Api";
 import Card from "./Card";
 import React from "react";
 import editIcon from '../image/Edit.svg';
@@ -8,21 +8,19 @@ import { CurrentUserContext } from "../constexts/CurrentUserContext";
 
 function Main(props) {
     const currentUser = React.useContext(CurrentUserContext)
-
-    /*//const [userInfo, setUserInfo] = React.useState({})
-    const [cards, setCards] = React.useState([])
-    useEffect(() => {
-        Promise.all([api.getInitialCards(), api.getApiUserInfo()])
-        .then(([ cards, userData ]) => {
-            setUserInfo(userData);
-            //userId = userData._id;
     
-            setCards(cards);
+    /*function handleCardLike(card) {
+        // Снова проверяем, есть ли уже лайк на этой карточке
+        const isLiked = card.likes.some(i => i._id === currentUser._id);
+        
+        // Отправляем запрос в API и получаем обновлённые данные карточки
+        api.addLike(card._id, !isLiked).then((newCard) => {
+            setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
         })
         .catch((err) => {
-            console.log(`Карточки не отобразились. Произошла ошибка: ${err}`);
+            console.log(`Что-то пошло не так, Like не поставился. Ошибка: ${err}`)
         });
-    }, [])*/
+    }*/
 
     return (
         <main>
@@ -53,6 +51,8 @@ function Main(props) {
                     name={cards.name}
                     likes={cards.likes.length}
                     onCardClick={props.onCardClick}
+                    onCardLike={props.onCardLike}
+                    onDeleteCard={props.onDeleteCard}    
                 />
                 ))}
             </section>
