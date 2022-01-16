@@ -9,6 +9,7 @@ import api from "../utils/Api";
 import {CurrentUserContext} from "../constexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
@@ -82,6 +83,17 @@ function App() {
             })
     }
 
+    function handleAddCard(data) {
+        api.addCard(data)
+            .then((newCard) => {
+                setCards([newCard, ...cards]);
+                closeAllPopups()
+            })
+            .catch((err) => {
+                console.log(`Карточку не удалось добавить на сервер. Ошибка: ${err}`)
+            })
+    }
+
     function handleEditProfileClick() {
         setIsEditProfilePopupOpen(true)
     }
@@ -128,18 +140,11 @@ function App() {
                     onSubmit={handleUpdateUser}
                 />
 
-                <PopupWithForm
+                <AddPlacePopup
                     isOpen={isAddPlacePopupOpen}
-                    onClose={closeAllPopups}
-                    title={'Новое место'} 
-                    name={'form_add'}>
-                        <input type="text" name="name" className="popup__input popup__subtitle" 
-                        id="profile_name" placeholder="Название" minLength="2" maxLength="30" required />
-                        <span className="popup__error" id="input-name-adding-error"/>
-                        <input type="url" name="link" className="popup__input popup__subtitle" 
-                        id="input-link" placeholder="Ссылка на картинку" required />
-                        <span className="popup__error" id="input-link-error"/>
-                </PopupWithForm>
+                    onClose={closeAllPopups} 
+                    onSubmit={handleAddCard}
+                />
 
                 <EditAvatarPopup 
                     isOpen={isEditAvatarPopupOpen}
