@@ -121,6 +121,21 @@ function App() {
             closeAllPopups()
         }
     }
+ 
+    //Добавляем обработчик Escape 
+    useEffect(() => {
+        if (isEditProfilePopupOpen || isAddPlacePopupOpen || isEditAvatarPopupOpen || selectedCard) {
+            const closeByEscape = (e) => {
+                if (e.key === 'Escape') {
+                    closeAllPopups();
+                }
+            }
+    
+            document.addEventListener('keydown', closeByEscape)
+            
+            return () => document.removeEventListener('keydown', closeByEscape)    
+        }
+    }, [isAddPlacePopupOpen, isEditProfilePopupOpen, isEditAvatarPopupOpen, selectedCard])
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
