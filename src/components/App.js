@@ -8,6 +8,7 @@ import ImagePopup from "./ImagePopup";
 import api from "../utils/Api";
 import {CurrentUserContext} from "../constexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 
 function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
@@ -70,6 +71,17 @@ function App() {
             })
     }
 
+    function handleUpdateAvatar(data) {
+        api.changeAvatar(data)
+            .then((newAvatar) => {
+              setCurrentUser(newAvatar)
+              closeAllPopups()
+            })
+            .catch((err) => {
+                console.log(`Не удалось сменить аватар. Ошибка: ${err}`)
+            })
+    }
+
     function handleEditProfileClick() {
         setIsEditProfilePopupOpen(true)
     }
@@ -129,15 +141,11 @@ function App() {
                         <span className="popup__error" id="input-link-error"/>
                 </PopupWithForm>
 
-                <PopupWithForm
+                <EditAvatarPopup 
                     isOpen={isEditAvatarPopupOpen}
-                    onClose={closeAllPopups}
-                    title={'Обновить аватар'} 
-                    name={'form_avatar'}>
-                        <input type="url" name="avatar" className="popup__input popup__subtitle" 
-                        id="input-name-avatar" placeholder="https://somewebsite.com/someimage.jpg" required />
-                        <span className="popup__error" id="input-name-avatar-error"/>
-                </PopupWithForm>
+                    onClose={closeAllPopups} 
+                    onSubmit={handleUpdateAvatar}
+                />
 
                 <ImagePopup
                     card={selectedCard}
