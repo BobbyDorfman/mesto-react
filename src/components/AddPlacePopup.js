@@ -36,7 +36,8 @@ function AddPlacePopup(props) {
             isOpen={props.isOpen}
             onClose={props.onClose}
             title={'Новое место'} 
-            name={'form_add'}>
+            name={'form_add'}
+            onCloseOnOverlay={props.onCloseOnOverlay}>
                 <input 
                     type="text" 
                     name="name" 

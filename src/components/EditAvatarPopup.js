@@ -22,7 +22,8 @@ function EditAvatarPopup(props) {
             isOpen={props.isOpen}
             onClose={props.onClose}
             title={'Обновить аватар'} 
-            name={'form_avatar'}>
+            name={'form_avatar'}
+            onCloseOnOverlay={props.onCloseOnOverlay}>
                 <input 
                     ref={avatarRef}
                     type="url" 

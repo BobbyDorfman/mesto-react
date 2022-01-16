@@ -42,7 +42,8 @@ function EditProfilePopup(props) {
             isOpen={props.isOpen}
             onClose={props.onClose}
             title={'Редактировать профиль'} 
-            name={'form_edit'}>
+            name={'form_edit'}
+            onCloseOnOverlay={props.onCloseOnOverlay}>
                 <input 
                     type="text" 
                     name="name_profile" 

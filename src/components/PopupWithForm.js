@@ -3,7 +3,7 @@ import closeIcon from '../image/Close_Icon.svg';
 
 function PopupWithForm(props) {
     return (
-        <div className={`popup popup_type_${props.name} ${props.isOpen ? `popup_is-opened`: ""}`}>
+        <div className={`popup popup_type_${props.name} ${props.isOpen ? `popup_is-opened`: ""}`} onClick={props.onCloseOnOverlay}>
             <div className="popup__container">
                 <button className="popup__close" type="button" onClick={props.onClose}>
                     <img className="popup__close-image" src={closeIcon} alt="Иконка - закрыть" />

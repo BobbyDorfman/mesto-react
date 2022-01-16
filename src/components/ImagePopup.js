@@ -2,7 +2,7 @@ import closeIcon from '../image/Close_Icon.svg';
 
 function ImagePopup(props) {  
     return (
-        <div className={`popup popup_type_image ${props.card ? 'popup_is-opened' : ''}`}>
+        <div className={`popup popup_type_image ${props.card ? 'popup_is-opened' : ''}`} onClick={props.onCloseOnOverlay}>
             <div className="image-in-full">
                 <button className="popup__close" type="button" onClick={props.onClose}>
                     <img className="popup__close-image" src={closeIcon} alt="Иконка - закрыть" />

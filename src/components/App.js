@@ -3,7 +3,6 @@ import '../index.css';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
-import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import api from "../utils/Api";
 import {CurrentUserContext} from "../constexts/CurrentUserContext";
@@ -117,6 +116,12 @@ function App() {
         setSelectedCard(null)
     }
 
+    function handleClickOutside(e) {
+        if (e.target.classList.contains('popup_is-opened')) {
+            closeAllPopups()
+        }
+    }
+
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <div className="body">
@@ -138,23 +143,27 @@ function App() {
                     isOpen={isEditProfilePopupOpen}
                     onClose={closeAllPopups}
                     onSubmit={handleUpdateUser}
+                    onCloseOnOverlay={handleClickOutside}
                 />
 
                 <AddPlacePopup
                     isOpen={isAddPlacePopupOpen}
                     onClose={closeAllPopups} 
                     onSubmit={handleAddCard}
+                    onCloseOnOverlay={handleClickOutside}
                 />
 
                 <EditAvatarPopup 
                     isOpen={isEditAvatarPopupOpen}
                     onClose={closeAllPopups} 
                     onSubmit={handleUpdateAvatar}
+                    onCloseOnOverlay={handleClickOutside}
                 />
 
                 <ImagePopup
                     card={selectedCard}
                     onClose={closeAllPopups}
+                    onCloseOnOverlay={handleClickOutside}
                 />
 
                 {/*<div className="popup popup_type_delete">
